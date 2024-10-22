@@ -39,8 +39,8 @@ docker run --gpus all -it ffmpeg-hw
 # Dockerfile structure
 The Dockerfile is divided into two stages:
 
-Builder Stage: This stage uses the nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04 image to install all necessary development tools and dependencies, including FFmpeg with NVIDIA GPU support.
-Final Stage: This stage uses the nvidia/cuda:11.2.2-cudnn8-runtime-ubuntu20.04 image and copies the built FFmpeg from the builder stage, resulting in a smaller final image.
+- Builder Stage: This stage uses the nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04 image to install all necessary development tools and dependencies, including FFmpeg with NVIDIA GPU support.
+- Final Stage: This stage uses the nvidia/cuda:11.2.2-cudnn8-runtime-ubuntu20.04 image and copies the built FFmpeg from the builder stage, resulting in a smaller final image.
 
 # License
 This project is licensed under the MIT License.
