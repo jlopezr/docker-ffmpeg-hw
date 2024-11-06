@@ -1,4 +1,4 @@
-()# FFmpeg with NVIDIA GPU Support Docker Image
+# FFmpeg with NVIDIA GPU Support Docker Image
 
 This repository contains a Dockerfile to build a Docker image with FFmpeg configured to use NVIDIA GPU support.
 
