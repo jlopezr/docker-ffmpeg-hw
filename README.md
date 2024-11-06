@@ -1,4 +1,4 @@
-# FFmpeg with NVIDIA GPU Support Docker Image
+()# FFmpeg with NVIDIA GPU Support Docker Image
 
 This repository contains a Dockerfile to build a Docker image with FFmpeg configured to use NVIDIA GPU support.
 
@@ -34,6 +34,12 @@ or
 
 ```sh
 docker run --gpus all -it ffmpeg-hw
+```
+
+If you want to use NVENC you must add the NVIDIA_DRIVER_CAPABILITIES variable. More info [here](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/1.10.0/user-guide.html)
+
+```sh
+docker run --gpus all -e NVIDIA_DRIVER_CAPABILITIES=all -it ffmpeg-hw
 ```
 
 # Dockerfile structure
