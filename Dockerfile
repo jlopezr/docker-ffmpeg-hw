@@ -13,7 +13,9 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     pkg-config \
     zlib1g-dev \
-    nasm \    
+    nasm \
+    libx265-dev \
+    libnuma-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install the NVIDIA Video Codec SDK
@@ -26,7 +28,7 @@ RUN git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git && \
 
 # Install FFmpeg with NVIDIA GPU support
 RUN git clone https://git.ffmpeg.org/ffmpeg.git && \
-    cd ffmpeg && ./configure --enable-cuda-nvcc --enable-cuvid --enable-nvenc --enable-nonfree --enable-libnpp --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64 --disable-static --enable-shared  --enable-decoder=png --enable-encoder=png && make -j $(nproc) && \
+    cd ffmpeg && ./configure --enable-libx265 --enable-gpl --enable-cuda-nvcc --enable-cuvid --enable-nvenc --enable-nonfree --enable-libnpp --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64 --disable-static --enable-shared  --enable-decoder=png --enable-encoder=png && make -j $(nproc) && \
     make -j $(nproc) && \
     make install && \
     cd .. && \
@@ -37,6 +39,9 @@ FROM nvidia/cuda:11.2.2-cudnn8-runtime-ubuntu20.04
 
 # Copy FFmpeg from the builder stage
 COPY --from=builder /usr/local /usr/local
+
+# Install libx265
+RUN apt-get update && apt-get install -y libx265-dev
 
 # Set the entrypoint
 CMD ["bash"]
